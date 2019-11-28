@@ -3,8 +3,8 @@ import S from './styled';
 
 export default () => {
   return (
-    <S.Navbar>
+    <S.Header>
       <h2>Pokedex</h2>
-    </S.Navbar>
+    </S.Header>
   );
 }

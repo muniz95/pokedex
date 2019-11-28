@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const Navbar = styled.nav`
+export const Header = styled.header`
+  width: 100%;
   background-color: red;
 `;
 
 export default {
-  Navbar
+  Header,
 };
