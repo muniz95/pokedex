@@ -6,12 +6,18 @@ interface IProps {
   sprites: {
     front_default: string
   };
+  types: any[];
 }
 
 export default (props: IProps) =>
   <S.PokemonCardContainer>
     <S.PokemonCardBody>
-      <img src={props.sprites.front_default} alt="" width={96} height={96} />
-      {props.name}
+      <div>
+        <img src={props.sprites.front_default} alt="" width={96} height={96} />
+      </div>
+      <div>
+        {props.name}
+      </div>
+      {props.types.map((type: any) => <span>{type.type.name}</span>)}
     </S.PokemonCardBody>
   </S.PokemonCardContainer>;

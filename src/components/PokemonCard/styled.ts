@@ -12,8 +12,15 @@ export const PokemonCardContainer = styled.div`
   }
 `;
 
+export const PokemonCardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const PokemonCardBody = styled.div`
   display: flex;
+  flex-flow: column;
   height: 300px;
   align-items: center;
   justify-content: center;
@@ -23,5 +30,6 @@ export const PokemonCardBody = styled.div`
 
 export default {
   PokemonCardContainer,
+  PokemonCardHeader,
   PokemonCardBody,
 };
