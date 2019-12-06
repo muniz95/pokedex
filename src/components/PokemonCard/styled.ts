@@ -20,16 +20,33 @@ export const PokemonCardHeader = styled.div`
 
 export const PokemonCardBody = styled.div`
   display: flex;
-  flex-flow: column;
   height: 300px;
   align-items: center;
   justify-content: center;
-  background-color: grey;
   margin: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 25px;
+  border-color: #DC0A2D;
+`;
+
+export const PokemonCardColumn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PokemonCardRow = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default {
   PokemonCardContainer,
   PokemonCardHeader,
   PokemonCardBody,
+  PokemonCardColumn,
+  PokemonCardRow,
 };
