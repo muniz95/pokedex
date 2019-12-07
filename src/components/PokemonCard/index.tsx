@@ -44,9 +44,9 @@ export default (props: IProps) =>
           <h2>{capitalize(props.name)}</h2>
         </S.PokemonCardRow>
         <S.PokemonCardColumn style={{width: '100%', justifyContent: 'space-evenly'}}>
-          {props.types.map((type: any) =>
-            <S.PokemonCardRow style={{backgroundColor: getTypeColor(type.type.name)}}>
-              {capitalize(type.type.name)}
+          {props.types.map(({type}: any) =>
+            <S.PokemonCardRow style={{backgroundColor: getTypeColor(type.name)}}>
+              {capitalize(type.name)}
             </S.PokemonCardRow>)
           }
         </S.PokemonCardColumn>
