@@ -31,6 +31,11 @@ const getTypeColor = (pokemonType: string) => ({
   'steel': '#B7B7CE',
   'fairy': '#D685AD',
 } as any)[pokemonType];
+const getTypeTextColor = (type: string) => {
+  return ["ghost", "poison", "fighting", "dragon", "dark"].includes(type)
+    ? "white"
+    : "black";
+}
 
 export default (props: IProps) =>
   <S.PokemonCardContainer>
@@ -45,7 +50,10 @@ export default (props: IProps) =>
         </S.PokemonCardRow>
         <S.PokemonCardColumn style={{width: '100%', justifyContent: 'space-evenly'}}>
           {props.types.map(({type}: any) =>
-            <S.PokemonCardRow style={{backgroundColor: getTypeColor(type.name)}}>
+            <S.PokemonCardRow style={{
+              backgroundColor: getTypeColor(type.name),
+              color: getTypeTextColor(type.name)
+            }} key={type.name} >
               {capitalize(type.name)}
             </S.PokemonCardRow>)
           }

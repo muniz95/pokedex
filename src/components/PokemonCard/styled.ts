@@ -41,6 +41,8 @@ export const PokemonCardRow = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
 export default {

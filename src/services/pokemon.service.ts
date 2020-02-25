@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const BASEURL = 'https://pokeapi.co/api/v2';
 
-export const getPokemonList = async () => {
-  const response = await axios.get(`${BASEURL}/pokemon`);
+export const getPokemonList = async (offset = 0) => {
+  const response = await axios.get(`${BASEURL}/pokemon?offset=${offset}`);
   const completePokemonInfo = await Promise.all(
     response.data.results.map(
       async (result: any) => (await axios.get(result.url)).data
