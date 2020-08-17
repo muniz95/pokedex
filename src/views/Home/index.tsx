@@ -48,9 +48,6 @@ export default () => {
           <PokemonCard {...pokemon} key={pokemon.id} />
         ))}
       </S.PokemonListContainer>
-      <button id="loadMore" onClick={loadMore} disabled={isLoading}>
-        Load more
-      </button>
     </div>
   );
 };
