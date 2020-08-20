@@ -3,7 +3,6 @@ import service from "../../services/pokemon.service";
 import PokemonCard from "../../components/PokemonCard";
 import S from "./styled";
 import Loading from "../../components/Loading";
-import { Link } from "react-router-dom";
 
 export default () => {
   const [pokemonList, setPokemonList] = React.useState<any[]>([]);
@@ -47,9 +46,7 @@ export default () => {
     <div id="pokemonListContainer">
       <S.PokemonListContainer>
         {pokemonList.map((pokemon) => (
-          <PokemonCard {...pokemon} key={pokemon.id}>
-            <Link to="details" />
-          </PokemonCard>
+          <PokemonCard {...pokemon} key={pokemon.id} />
         ))}
       </S.PokemonListContainer>
       {isLoading && <Loading />}

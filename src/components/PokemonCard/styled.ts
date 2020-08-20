@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const PokemonCardContainer = styled.div`
   @media (max-width: 767px) {
@@ -18,7 +19,7 @@ export const PokemonCardHeader = styled.div`
   justify-content: center;
 `;
 
-export const PokemonCardBody = styled.div`
+export const PokemonCardBody = styled(Link)`
   display: flex;
   height: 300px;
   align-items: center;
@@ -28,6 +29,8 @@ export const PokemonCardBody = styled.div`
   border-width: 1px;
   border-radius: 25px;
   border-color: #DC0A2D;
+  text-decoration: none;
+  color: black;
 `;
 
 export const PokemonCardColumn = styled.div`

@@ -5,7 +5,6 @@ export const PokemonListContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-top: 70px;
 `;
 
 export default {

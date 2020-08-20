@@ -39,7 +39,7 @@ const getTypeTextColor = (type: string) => {
 
 export default (props: IProps) =>
   <S.PokemonCardContainer>
-    <S.PokemonCardBody>
+    <S.PokemonCardBody to={`/details/${props.id}`}>
       <S.PokemonCardColumn style={{width: '30%'}}>
         <img src={props.sprites.front_default} alt="" width={96} height={96} />
       </S.PokemonCardColumn>

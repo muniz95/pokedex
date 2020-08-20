@@ -16,6 +16,10 @@ html, body, #root {
   justify-content: flex-start;
 }
 
+.main {
+  margin-top: 70px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

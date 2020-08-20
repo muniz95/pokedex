@@ -12,11 +12,17 @@ export const getPokemonList = async (offset = 0) => {
   return completePokemonInfo;
 }
 
+export const getPokemonById = async (id: number) => {
+  const response = await axios.get(`${BASEURL}/pokemon/${id}`);
+  return response.data;
+}
+
 export const getPokemonByUrl = async (url: string) => {
   const response = await axios.get(url);
   return response.data;
 }
 
 export default {
+  getPokemonById,
   getPokemonList,
 };
