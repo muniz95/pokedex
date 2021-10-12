@@ -8,6 +8,7 @@ interface IProps {
     front_default: string
   };
   types: any[];
+  click: Function;
 }
 
 const capitalize = (word: string) => word.charAt(0).toUpperCase() + word.slice(1);
@@ -37,9 +38,9 @@ const getTypeTextColor = (type: string) => {
     : "black";
 }
 
-export default (props: IProps) =>
-  <S.PokemonCardContainer>
-    <S.PokemonCardBody to={`/details/${props.id}`}>
+const PokemonCard = (props: IProps) =>
+  <S.PokemonCardContainer onClick={() => props.click(props.id)}>
+    <S.PokemonCardBody>
       <S.PokemonCardColumn style={{width: '30%'}}>
         <img src={props.sprites.front_default} alt="" width={96} height={96} />
       </S.PokemonCardColumn>
@@ -61,3 +62,5 @@ export default (props: IProps) =>
       </S.PokemonCardRow>
     </S.PokemonCardBody>
   </S.PokemonCardContainer>;
+
+export default PokemonCard;

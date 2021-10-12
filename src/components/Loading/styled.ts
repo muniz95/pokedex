@@ -86,8 +86,10 @@ export const PokeballButton = styled.div`
   animation: ${blink} 0.5s alternate 7;
 `;
 
-export default {
+const components = {
   CenterOnPage,
   Pokeball,
   PokeballButton,
 };
+
+export default components;

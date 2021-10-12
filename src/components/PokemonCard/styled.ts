@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export const PokemonCardContainer = styled.div`
   @media (max-width: 767px) {
@@ -11,6 +11,7 @@ export const PokemonCardContainer = styled.div`
   @media (min-width: 1024px) {
     width: 22%
   }
+  height: auto;
 `;
 
 export const PokemonCardHeader = styled.div`
@@ -19,7 +20,8 @@ export const PokemonCardHeader = styled.div`
   justify-content: center;
 `;
 
-export const PokemonCardBody = styled(Link)`
+// export const PokemonCardBody = styled(Link)`
+export const PokemonCardBody = styled.div`
   display: flex;
   height: 300px;
   align-items: center;
@@ -29,7 +31,7 @@ export const PokemonCardBody = styled(Link)`
   border-width: 1px;
   border-radius: 25px;
   border-color: #DC0A2D;
-  text-decoration: none;
+  /* text-decoration: none; */
   color: black;
 `;
 
@@ -48,10 +50,12 @@ export const PokemonCardRow = styled.div`
   border-radius: 5px;
 `;
 
-export default {
+const components = {
   PokemonCardContainer,
   PokemonCardHeader,
   PokemonCardBody,
   PokemonCardColumn,
   PokemonCardRow,
 };
+
+export default components;

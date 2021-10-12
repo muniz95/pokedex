@@ -3,10 +3,13 @@ import service from "../../services/pokemon.service";
 import PokemonCard from "../../components/PokemonCard";
 import S from "./styled";
 import Loading from "../../components/Loading";
+import PokemonDetails from "../../components/PokemonDetails";
 
-export default () => {
+const Home = () => {
   const [pokemonList, setPokemonList] = React.useState<any[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [showDetails, setShowDetails] = React.useState<boolean>(false);
+  const [currentId, setCurrentId] = React.useState<number>(0);
   const listSizeRef = React.useRef<number>();
   const wrappedElementRef = React.useRef<HTMLElement>();
 
@@ -42,14 +45,31 @@ export default () => {
     listSizeRef.current = pokemonList.length;
   }, [pokemonList]);
 
+  function handleClick(id: number) {
+    console.log('clicked', id);
+    setCurrentId(id);
+    setShowDetails(true);
+    setTimeout(() => {
+      setShowDetails(false);
+    }, 3000);
+  }
+
   return (
     <div id="pokemonListContainer">
-      <S.PokemonListContainer>
-        {pokemonList.map((pokemon) => (
-          <PokemonCard {...pokemon} key={pokemon.id} />
-        ))}
-      </S.PokemonListContainer>
+      {
+        showDetails 
+        ? 
+          <PokemonDetails id={currentId} />
+        :
+          <S.PokemonListContainer>
+            {pokemonList.map((pokemon) => (
+              <PokemonCard {...pokemon} key={pokemon.id} click={handleClick} />
+            ))}
+          </S.PokemonListContainer>
+      }
       {isLoading && <Loading />}
     </div>
   );
 };
+
+export default Home;

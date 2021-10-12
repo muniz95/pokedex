@@ -7,6 +7,8 @@ export const PokemonListContainer = styled.div`
   justify-content: center;
 `;
 
-export default {
+const components = {
   PokemonListContainer,
 };
+
+export default components;

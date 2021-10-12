@@ -6,6 +6,8 @@ export const Header = styled.header`
   position: fixed;
 `;
 
-export default {
+const components = {
   Header,
 };
+
+export default components;
