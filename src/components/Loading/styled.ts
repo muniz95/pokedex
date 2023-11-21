@@ -52,19 +52,19 @@ export const Pokeball = styled.div`
   animation: ${fall} 0.25s ease-in-out,
     ${shake} 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
 
-  ::before,
-  ::after {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
   }
 
-  ::before {
+  &::before {
     background: red;
     width: 100%;
     height: 50%;
   }
 
-  ::after {
+  &::after {
     top: calc(50% - 10px);
     width: 100%;
     height: 20px;
