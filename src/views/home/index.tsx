@@ -1,24 +1,29 @@
+import { usePokemonList } from '@/services/get-pokemons';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Loading from '../../components/loading';
 import PokemonCard from '../../components/pokemon-card';
 import PokemonDetails from '../../components/pokemon-details';
-import service from '../../services/pokemon.service';
 import S from './styled';
 
 const Home = () => {
-  const [pokemonList, setPokemonList] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [offset, setOffset] = useState<number>(0);
   const [currentId, setCurrentId] = useState<number>(0);
   const listSizeRef = useRef<number>(0);
   const wrappedElementRef = useRef<HTMLElement>(undefined);
 
+  const { data: pokemons } = usePokemonList({
+    offset,
+  });
+
   const loadMore = useCallback(() => {
-    setIsLoading(true);
-    service.getPokemonList(listSizeRef.current).then((results: any[]) => {
-      setPokemonList((l) => [...l, ...results]);
-      setIsLoading(false);
-    });
+    console.log('loadMore', pokemons?.results.length);
+    
+    listSizeRef.current = pokemons?.results.length || 0;
+    setOffset(pokemons?.results.length || 0);
+    // service.getPokemonList(listSizeRef.current).then((results: any[]) => {
+    //   setPokemonList((l) => [...l, ...results]);
+    //   setIsLoading(false);
+    // });
   }, []);
 
   const isBottom = (el: HTMLElement) => {
@@ -37,36 +42,31 @@ const Home = () => {
   }, [loadMore]);
 
   useEffect(() => {
-    service.getPokemonList().then(setPokemonList);
+    // service.getPokemonList().then(setPokemonList);
     document.addEventListener('scroll', trackScrolling);
   }, [trackScrolling]);
 
-  useEffect(() => {
-    listSizeRef.current = pokemonList.length;
-  }, [pokemonList]);
-
-  function handleClick(id: number) {
+  const handleClick = (id: number) => {
     console.log('clicked', id);
     setCurrentId(id);
     setShowDetails(true);
     setTimeout(() => {
       setShowDetails(false);
     }, 3000);
-  }
+  };
 
   return (
-    <div id="pokemonListContainer">
+    <S.PokemonListContainer id="pokemonListContainer">
       {showDetails ? (
         <PokemonDetails id={currentId} />
       ) : (
-        <S.PokemonListContainer>
-          {pokemonList.map((pokemon) => (
-            <PokemonCard {...pokemon} key={pokemon.id} click={handleClick} />
-          ))}
-        </S.PokemonListContainer>
+        pokemons &&
+        pokemons.results &&
+        pokemons.results.map((pokemon) => (
+          <PokemonCard {...pokemon} key={pokemon.id} click={handleClick} />
+        ))
       )}
-      {isLoading && <Loading />}
-    </div>
+    </S.PokemonListContainer>
   );
 };
 

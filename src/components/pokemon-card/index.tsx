@@ -1,66 +1,73 @@
-import React from "react";
 import S from './styled';
 
 interface IProps {
   name: string;
   id: number;
   sprites: {
-    front_default: string
+    front_default: string;
   };
   types: any[];
   click: Function;
 }
 
-const capitalize = (word: string) => word.charAt(0).toUpperCase() + word.slice(1);
-const getTypeColor = (pokemonType: string) => ({
-  'normal': '#A8A77A',
-  'fire': '#EE8130',
-  'water': '#6390F0',
-  'electric': '#F7D02C',
-  'grass': '#7AC74C',
-  'ice': '#96D9D6',
-  'fighting': '#C22E28',
-  'poison': '#A33EA1',
-  'ground': '#E2BF65',
-  'flying': '#A98FF3',
-  'psychic': '#F95587',
-  'bug': '#A6B91A',
-  'rock': '#B6A136',
-  'ghost': '#735797',
-  'dragon': '#6F35FC',
-  'dark': '#705746',
-  'steel': '#B7B7CE',
-  'fairy': '#D685AD',
-} as any)[pokemonType];
+const capitalize = (word: string) =>
+  word.charAt(0).toUpperCase() + word.slice(1);
+const getTypeColor = (pokemonType: string) =>
+  (
+    ({
+      normal: '#A8A77A',
+      fire: '#EE8130',
+      water: '#6390F0',
+      electric: '#F7D02C',
+      grass: '#7AC74C',
+      ice: '#96D9D6',
+      fighting: '#C22E28',
+      poison: '#A33EA1',
+      ground: '#E2BF65',
+      flying: '#A98FF3',
+      psychic: '#F95587',
+      bug: '#A6B91A',
+      rock: '#B6A136',
+      ghost: '#735797',
+      dragon: '#6F35FC',
+      dark: '#705746',
+      steel: '#B7B7CE',
+      fairy: '#D685AD',
+    }) as any
+  )[pokemonType];
 const getTypeTextColor = (type: string) => {
-  return ["ghost", "poison", "fighting", "dragon", "dark"].includes(type)
-    ? "white"
-    : "black";
-}
+  return ['ghost', 'poison', 'fighting', 'dragon', 'dark'].includes(type)
+    ? 'white'
+    : 'black';
+};
 
-const PokemonCard = (props: IProps) =>
+const PokemonCard = (props: IProps) => (
   <S.PokemonCardContainer onClick={() => props.click(props.id)}>
-    <S.PokemonCardBody>
-      <S.PokemonCardColumn style={{width: '30%'}}>
-        <img src={props.sprites.front_default} alt="" width={96} height={96} />
-      </S.PokemonCardColumn>
-      <S.PokemonCardRow style={{width: '70%'}}>
-        <S.PokemonCardRow>
-          <h4>#{props.id}</h4>
-          <h2>{capitalize(props.name)}</h2>
-        </S.PokemonCardRow>
-        <S.PokemonCardColumn style={{width: '100%', justifyContent: 'space-evenly'}}>
-          {props.types.map(({type}: any) =>
-            <S.PokemonCardRow style={{
-              backgroundColor: getTypeColor(type.name),
-              color: getTypeTextColor(type.name)
-            }} key={type.name} >
-              {capitalize(type.name)}
-            </S.PokemonCardRow>)
-          }
-        </S.PokemonCardColumn>
+    <S.PokemonCardColumn style={{ width: '30%' }}>
+      <img src={props.sprites.front_default} alt="" width={96} height={96} />
+    </S.PokemonCardColumn>
+    <S.PokemonCardRow style={{ width: '70%' }}>
+      <S.PokemonCardRow>
+        <h4>#{props.id}</h4>
+        <h2>{capitalize(props.name)}</h2>
       </S.PokemonCardRow>
-    </S.PokemonCardBody>
-  </S.PokemonCardContainer>;
+      <S.PokemonCardColumn
+        style={{ width: '100%', justifyContent: 'space-evenly' }}
+      >
+        {props.types.map(({ type }: any) => (
+          <S.PokemonCardRow
+            style={{
+              backgroundColor: getTypeColor(type.name),
+              color: getTypeTextColor(type.name),
+            }}
+            key={type.name}
+          >
+            {capitalize(type.name)}
+          </S.PokemonCardRow>
+        ))}
+      </S.PokemonCardColumn>
+    </S.PokemonCardRow>
+  </S.PokemonCardContainer>
+);
 
 export default PokemonCard;
