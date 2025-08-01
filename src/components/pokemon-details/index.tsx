@@ -1,14 +1,14 @@
-import React from "react";
-import service from "../../services/pokemon.service";
+import { useEffect, useState } from 'react';
+import service from '../../services/pokemon.service';
 
 interface IProps {
   id: number;
-};
+}
 
 const PokemonDetails = ({ id }: IProps) => {
-  const [pokemon, setPokemon] = React.useState<any>();
+  const [pokemon, setPokemon] = useState<any>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (id !== 0) {
       service.getPokemonById(id).then(setPokemon);
     }
@@ -16,8 +16,10 @@ const PokemonDetails = ({ id }: IProps) => {
 
   return (
     <>
-      <div role="button" aria-label="Back">Back</div>
-      <div style={{ backgroundColor: "blue", width: "100%", height: "100%" }}>
+      <div role="button" aria-label="Back">
+        Back
+      </div>
+      <div style={{ backgroundColor: 'blue', width: '100%', height: '100%' }}>
         {pokemon?.name}
       </div>
     </>
