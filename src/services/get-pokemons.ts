@@ -1,8 +1,7 @@
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { api } from '@/lib/api-client';
-import { QueryConfig } from '@/lib/react-query';
-import { PokemonListResponse } from '@/types/api';
+import { Pokemon, PokemonListResponse } from '@/types/api';
 
 export const getPokemonList = ({
   offset = 0,
@@ -15,8 +14,7 @@ export const getPokemonList = ({
         offset,
       },
     })
-    .then(async (response) => {
-      console.log('getPokemonList');
+    .then(async (response: any) => {
       const results = await Promise.all(
         response.results.map(async (pokemon: any) => {
           const response = await fetch(pokemon.url);
@@ -33,23 +31,23 @@ export const getPokemonList = ({
     });
 };
 
-export const getPokemonListQueryOptions = (offset: number) => {
-  return queryOptions({
-    queryKey: ['pokemons'],
-    queryFn: () => {
-      return getPokemonList({ offset });
+export const useInfinitePokemonList = () => {
+  return useInfiniteQuery({
+    queryKey: ['pokemons-infinite'],
+    queryFn: ({ pageParam = 0 }) => getPokemonList({ offset: pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      const currentCount = allPages.reduce(
+        (total, page) => total + page.results.length,
+        0
+      );
+      return currentCount < lastPage.count ? currentCount : undefined;
     },
-  });
-};
-
-type PokemonListQueryOptions = {
-  config?: QueryConfig<typeof getPokemonListQueryOptions>;
-  offset?: number;
-};
-
-export const usePokemonList = ({ offset, config }: PokemonListQueryOptions) => {
-  return useQuery({
-    ...getPokemonListQueryOptions(offset || 0),
-    ...config,
+    select: (data) => ({
+      pages: data.pages,
+      pageParams: data.pageParams,
+      results: data.pages.reduce<Pokemon[]>((acc, page) => [...acc, ...page.results], []),
+      count: data.pages[0]?.count ?? 0,
+    }),
   });
 };

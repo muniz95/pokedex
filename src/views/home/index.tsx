@@ -1,30 +1,27 @@
-import { usePokemonList } from '@/services/get-pokemons';
+import { useInfinitePokemonList } from '@/services/get-pokemons';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import PokemonCard from '../../components/pokemon-card';
-import PokemonDetails from '../../components/pokemon-details';
+import PokemonCard from '@/components/pokemon-card';
+import PokemonDetails from '@/components/pokemon-details';
 import S from './styled';
+import Loading from '@/components/loading';
 
 const Home = () => {
   const [showDetails, setShowDetails] = useState<boolean>(false);
-  const [offset, setOffset] = useState<number>(0);
   const [currentId, setCurrentId] = useState<number>(0);
-  const listSizeRef = useRef<number>(0);
   const wrappedElementRef = useRef<HTMLElement>(undefined);
 
-  const { data: pokemons } = usePokemonList({
-    offset,
-  });
+  const {
+    data: pokemons,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfinitePokemonList();
 
   const loadMore = useCallback(() => {
-    console.log('loadMore', pokemons?.results.length);
-    
-    listSizeRef.current = pokemons?.results.length || 0;
-    setOffset(pokemons?.results.length || 0);
-    // service.getPokemonList(listSizeRef.current).then((results: any[]) => {
-    //   setPokemonList((l) => [...l, ...results]);
-    //   setIsLoading(false);
-    // });
-  }, []);
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const isBottom = (el: HTMLElement) => {
     return el.getBoundingClientRect().bottom <= window.innerHeight;
@@ -42,7 +39,6 @@ const Home = () => {
   }, [loadMore]);
 
   useEffect(() => {
-    // service.getPokemonList().then(setPokemonList);
     document.addEventListener('scroll', trackScrolling);
   }, [trackScrolling]);
 
@@ -66,6 +62,7 @@ const Home = () => {
           <PokemonCard {...pokemon} key={pokemon.id} click={handleClick} />
         ))
       )}
+      {isFetchingNextPage && (<Loading />)}
     </S.PokemonListContainer>
   );
 };
