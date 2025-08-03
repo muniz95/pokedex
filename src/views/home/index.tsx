@@ -53,16 +53,13 @@ const Home = () => {
 
   return (
     <S.PokemonListContainer id="pokemonListContainer">
-      {showDetails ? (
-        <PokemonDetails id={currentId} />
-      ) : (
-        pokemons &&
+      <PokemonDetails id={currentId} isOpen={showDetails} />
+      {pokemons &&
         pokemons.results &&
         pokemons.results.map((pokemon) => (
           <PokemonCard {...pokemon} key={pokemon.id} click={handleClick} />
-        ))
-      )}
-      {isFetchingNextPage && (<Loading />)}
+        ))}
+      {isFetchingNextPage && <Loading />}
     </S.PokemonListContainer>
   );
 };

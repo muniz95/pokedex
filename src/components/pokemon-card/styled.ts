@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PokemonCardHeader = styled.div`
   display: flex;
@@ -9,13 +9,13 @@ export const PokemonCardHeader = styled.div`
 // export const PokemonCardBody = styled(Link)`
 export const PokemonCardContainer = styled.div`
   @media (max-width: 767px) {
-    width: 100%
+    width: 100%;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    width: 50%
+    width: 50%;
   }
   @media (min-width: 1024px) {
-    width: 25%
+    width: 25%;
   }
 
   display: flex;
@@ -25,7 +25,7 @@ export const PokemonCardContainer = styled.div`
   border-style: solid;
   border-width: 1px;
   border-radius: 25px;
-  border-color: #DC0A2D;
+  border-color: #dc0a2d;
   /* text-decoration: none; */
   color: black;
 `;
